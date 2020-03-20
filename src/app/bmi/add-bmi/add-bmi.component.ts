@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { BmiService } from '../../services/bmi.service';
+import { Bmi } from '../../model/bmi';
 
 @Component({
   selector: 'app-add-bmi',
@@ -7,15 +9,16 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./add-bmi.component.css']
 })
 export class AddBmiComponent {
-	public bmiForm: FormGroup = new FormGroup({
-		height: new FormControl(0, Validators.required),
-		weight: new FormControl(0, Validators.required),
-		date: new FormControl(new Date().setHours(0,0,0,0), Validators.required)
-	});
+	public bmi: Bmi;
 	
-	constructor() { }
+	constructor(private bmiService: BmiService) {
+		this.bmi = new Bmi(0, 0, new Date());
+	}
 
-	onSubmit() {
-	  console.log('Height:', this.bmiForm.value);
+	onSubmit(bmiForm) {
+		console.log(this.bmi);
+		this.bmi.date = new Date(this.bmi.date);
+		this.bmiService.addBmi(this.bmi);
+		this.bmi = new Bmi(0, 0, new Date());
 	}
 }

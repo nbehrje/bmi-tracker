@@ -1,16 +1,16 @@
 <div class="form-group">
-	<form [formGroup]="bmiForm" (ngSubmit)="onSubmit()">
+	<form #bmiForm="ngForm" (ngSubmit)="onSubmit(bmiForm)">
 		<input type="date"
 			name="date"
-			formControlName="date">
+			[(ngModel)]="bmi.date">
 		<input type="number"
 			placeholder="Height"
 			name="height"
-			formControlName="height">
+			[(ngModel)]="bmi.height">
 		<input type="number"
 			placeholder="Weight"
 			name="weight"
-			formControlName="weight">
+			[(ngModel)]="bmi.weight">
 		<button type="submit">Add</button>
 	</form>
 </div>
