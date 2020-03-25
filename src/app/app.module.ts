@@ -1,12 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ChartsModule } from 'ng2-charts';
 
 import { AppComponent } from './app.component';
 import { AddBmiComponent } from './bmi/add-bmi/add-bmi.component';
 import { BmiListComponent } from './bmi/bmi-list/bmi-list.component';
 import { BmiItemComponent } from './bmi/bmi-item/bmi-item.component';
 import { BmiService } from './services/bmi.service';
+import { BmiChartComponent } from './bmi/bmi-chart/bmi-chart.component';
 
 
 @NgModule({
@@ -14,11 +16,13 @@ import { BmiService } from './services/bmi.service';
     AppComponent,
     AddBmiComponent,
     BmiListComponent,
-    BmiItemComponent
+    BmiItemComponent,
+	BmiChartComponent
   ],
   imports: [
     BrowserModule,
-	FormsModule
+	FormsModule,
+	ChartsModule
   ],
   providers: [BmiService],
   bootstrap: [AppComponent]
