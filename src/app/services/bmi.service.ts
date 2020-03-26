@@ -9,8 +9,8 @@ export class BmiService {
 	constructor() {
 		this.bmis = [
 			new Bmi(6, 150, new Date("2020-01-01")),
-			new Bmi(6, 155, new Date("2020-02-01")),
-			new Bmi(6, 145, new Date("2020-03-01"))
+			new Bmi(6, 155, new Date("2020-01-02")),
+			new Bmi(6, 145, new Date("2020-01-03"))
 		];
 	}
 	

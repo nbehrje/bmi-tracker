@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ChartDataSets, ChartOptions } from 'chart.js';
+import { BmiService } from '../../services/bmi.service';
+
 
 @Component({
   selector: 'app-bmi-chart',
@@ -7,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BmiChartComponent implements OnInit {
 
-	constructor() { }
+	constructor(private bmiService: BmiService) { }
 
 	public chartOptions = {
 		showLines: true
@@ -20,6 +23,12 @@ export class BmiChartComponent implements OnInit {
 	public chartType = "line";
 	
 	ngOnInit(): void {
+		this.chartData = [{
+			data: this.bmiService.getBmis().map(bmi => bmi.calcBmi()),
+			label: 'BMI',
+			lineTension: 0,
+			fill: false
+		}];
 	}
 
 }
