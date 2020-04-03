@@ -17,7 +17,6 @@ export class AddBmiComponent {
 
 	onSubmit(bmiForm) {
 		this.bmi.date = new Date(this.bmi.date);
-		console.log(this.bmi);
 		this.bmiService.addBmi(this.bmi);
 		this.bmi = new Bmi(0, 0, new Date());
 	}
