@@ -1,6 +1,8 @@
 <div>
 	<div>
-		<button>Week</button>
+		<button (click)="changeToWeek()">Week</button>
+		<button (click)="changeToMonth()">Month</button>
+		<button>Year</button>
 	</div>
 	<canvas id="bmiChart" baseChart
 		[datasets]="chartData"

@@ -24,30 +24,88 @@ export class BmiChartComponent implements OnInit {
 	
 	ngOnInit(): void {
 		this.bmiService.getBmis().subscribe(bmis => {
-				this.bmis = bmis;
-				let today = new Date();
-				let start = new Date(today);
-				start.setDate(today.getDate() - 6);
-
-				
-				let last = this.bmis.slice(Math.max(this.bmis.length - 6, 0));
-				var idx;
-				for(idx = 0; idx < last.length; idx++){
-					if(last[idx].date.valueOf() >= start.valueOf()) break;
-				}
-				last = last.slice(idx);
-				let days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-				this.chartLabels = days.concat(days).slice(start.getDay(), start.getDay()+7);
-				this.chartData = [{
-					data: last.map(function(bmi){
-						var xy = {x: days[bmi.date.getDay()], y: bmi.calcBmi()}
-						return xy;
-					}),
-					label: 'BMI',
-					lineTension: 0,
-					fill: false
-				}];
+			this.bmis = bmis;
+			let today = new Date();
+			today.setHours(0,0,0,0);
+			let start = new Date(today);
+			start.setDate(today.getDate() - 6);
+			
+			let last = this.bmis.slice(Math.max(this.bmis.length - 6, 0));
+			var idxStart;
+			for(idxStart = 0; idxStart < last.length; idxStart++){
+				if(last[idxStart].date.valueOf() >= start.valueOf()) break;
+			}
+			last = last.slice(idxStart);
+			let days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+			this.chartLabels = days.concat(days).slice(start.getDay(), start.getDay()+7);
+			this.chartData = [{
+				data: last.map(function(bmi){
+					var xy = {x: days[bmi.date.getDay()], y: bmi.calcBmi()}
+					return xy;
+				}),
+				label: 'BMI',
+				lineTension: 0,
+				fill: false
+			}];
 		});
 	}
-
+	
+	changeToWeek(): void {
+		let today = new Date();
+		today.setHours(0,0,0,0);
+		let start = new Date(today);
+		start.setDate(today.getDate() - 6);
+		
+		let last = this.bmis.slice(Math.max(this.bmis.length - 6, 0));
+		var idxStart;
+		for(idxStart = 0; idxStart < last.length; idxStart++){
+			if(last[idxStart].date.valueOf() >= start.valueOf()) break;
+		}
+		last = last.slice(idxStart);
+		let days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+		this.chartLabels = days.concat(days).slice(start.getDay(), today.getDay());
+		this.chartData = [{
+			data: last.map(function(bmi){
+				var xy = {x: days[bmi.date.getDay()], y: bmi.calcBmi()}
+				return xy;
+			}),
+			label: 'BMI',
+			lineTension: 0,
+			fill: false
+		}];
+	}
+	
+	changeToMonth(): void {
+		let today = new Date();
+		today.setHours(0,0,0,0);
+		let start = new Date(today);
+		start.setDate(today.getDate() - 29);
+		
+		let last = this.bmis.slice(Math.max(this.bmis.length - 29, 0));
+		var idxStart;
+		for(idxStart = 0; idxStart < last.length; idxStart++){
+			if(last[idxStart].date.valueOf() >= start.valueOf()) break;
+		}
+		last = last.slice(idxStart);
+		console.log(last);
+		
+		let days = [];
+		for(var d = new Date(start); d <= today; d.setDate(d.getDate()+1)){
+			days.push(d.getDate());
+		}
+		this.chartLabels = days;
+		this.chartData = [{
+			data: last.map(function(bmi){
+				var xy = {x: bmi.date.getDate(), y: bmi.calcBmi()}
+				return xy;
+			}),
+			label: 'BMI',
+			lineTension: 0,
+			fill: false
+		}];
+	}
+	
+	changeToYear(): void {
+		
+	}
 }

@@ -11,9 +11,11 @@ export class BmiService {
 	private bmis = new BehaviorSubject<Bmi[]>([]);
 	constructor() {
 		this.bmis = new BehaviorSubject<Bmi[]>([
-			new Bmi(6, 150, new Date("2020-03-31")),
-			new Bmi(6, 155, new Date("2020-04-01")),
-			new Bmi(6, 145, new Date("2020-04-02"))
+			new Bmi(6, 150, new Date("2020-03-01")),
+			new Bmi(6, 150, new Date("2020-03-29")),
+			new Bmi(6, 155, new Date("2020-04-04")),
+			new Bmi(6, 145, new Date("2020-04-07")),
+			new Bmi(6, 150, new Date("2020-04-09")),
 		]);
 	}
 	
