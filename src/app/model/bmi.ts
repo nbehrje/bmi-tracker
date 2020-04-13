@@ -7,4 +7,8 @@ export class Bmi {
 		let kg = this.weight * 0.45359237;
 		return kg / (m*m);
 	}
+	
+	getDate() : Date {
+		return this.date;
+	}
 }

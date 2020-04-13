@@ -15,7 +15,7 @@ export class BmiService {
 			new Bmi(6, 150, new Date("2020-03-29")),
 			new Bmi(6, 155, new Date("2020-04-04")),
 			new Bmi(6, 145, new Date("2020-04-07")),
-			new Bmi(6, 150, new Date("2020-04-09")),
+			new Bmi(6, 155, new Date("2020-04-09")),
 		]);
 	}
 	

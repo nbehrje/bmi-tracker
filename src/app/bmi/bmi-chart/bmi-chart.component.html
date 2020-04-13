@@ -2,7 +2,7 @@
 	<div>
 		<button (click)="changeToWeek()">Week</button>
 		<button (click)="changeToMonth()">Month</button>
-		<button>Year</button>
+		<button (click)="changeToYear()">Year</button>
 	</div>
 	<canvas id="bmiChart" baseChart
 		[datasets]="chartData"

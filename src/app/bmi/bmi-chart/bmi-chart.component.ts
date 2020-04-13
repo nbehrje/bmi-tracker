@@ -87,7 +87,6 @@ export class BmiChartComponent implements OnInit {
 			if(last[idxStart].date.valueOf() >= start.valueOf()) break;
 		}
 		last = last.slice(idxStart);
-		console.log(last);
 		
 		let days = [];
 		for(var d = new Date(start); d <= today; d.setDate(d.getDate()+1)){
@@ -103,9 +102,49 @@ export class BmiChartComponent implements OnInit {
 			lineTension: 0,
 			fill: false
 		}];
+		console.log(this.chartData.data);
 	}
 	
 	changeToYear(): void {
+		let today = new Date();
+		today.setHours(0,0,0,0);
+		let start = new Date(today);
+		start.setFullYear(today.getFullYear() - 1);
+		start.setMonth(start.getMonth()+1);
+		start.setDate(1);
 		
+		let last = this.bmis.slice(Math.max(this.bmis.length - 365, 0));
+		var idxStart;
+		for(idxStart = 0; idxStart < last.length; idxStart++){
+			if(last[idxStart].date.valueOf() >= start.valueOf()) break;
+		}
+		last = last.slice(idxStart);
+		
+		let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
+		this.chartLabels = months.concat(months).slice(start.getMonth(), start.getMonth()+12);
+		let monthData = new Map();
+		let monthCount = new Map();
+		last.forEach((bmi) => {
+			let mo = months[bmi.getDate().getMonth()];
+			if(!monthData.has(mo)){
+				monthData.set(mo,0);
+				monthCount.set(mo,0);
+			}
+			monthData.set(mo, monthData.get(mo) + bmi.calcBmi());
+			monthCount.set(mo, monthCount.get(mo) + 1);
+		})
+		
+		monthData.forEach((total, month) => {
+			monthData.set(month, total / monthCount.get(month));
+		});
+		this.chartData = [{
+			data: Array.from(monthData.keys()).map(function(month) {
+				var xy = {x: month, y: monthData.get(month)};
+				return xy;
+			}),
+			label: 'BMI',
+			lineTension: 0,
+			fill: false
+		}];
 	}
 }
