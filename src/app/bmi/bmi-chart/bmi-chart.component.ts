@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { BmiService } from '../../services/bmi.service';
 import { Bmi } from '../../model/bmi';
+import 'chartjs-plugin-annotation';
 
 @Component({
   selector: 'app-bmi-chart',
@@ -12,9 +13,7 @@ export class BmiChartComponent implements OnInit {
 	public bmis: Bmi[];
 	constructor(private bmiService: BmiService) { }
 
-	public chartOptions = {
-		showLines: true
-	};
+	public chartOptions = {	};
 	
 	public chartLabels = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 	
@@ -47,6 +46,30 @@ export class BmiChartComponent implements OnInit {
 				lineTension: 0,
 				fill: false
 			}];
+		});
+		
+		this.bmiService.getGoal().subscribe(goal => {
+			if (goal <= 0){
+				return;
+			}
+			this.chartOptions = {
+				annotation: {
+					annotations: [{
+						drawTime: 'afterDatasetsDraw',
+						type: 'line',
+						mode: 'horizontal',
+						scaleID: 'y-axis-0',
+						value: goal,
+						borderColor: 'blue',
+						borderWidth: 4,
+						label: {
+						  enabled: true,
+						  content: 'Target BMI'
+						}
+					}]
+				}
+			}
+			console.log(this.chartOptions);
 		});
 	}
 	
@@ -102,7 +125,6 @@ export class BmiChartComponent implements OnInit {
 			lineTension: 0,
 			fill: false
 		}];
-		console.log(this.chartData.data);
 	}
 	
 	changeToYear(): void {

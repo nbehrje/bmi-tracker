@@ -13,4 +13,11 @@
 			[(ngModel)]="bmi.weight">
 		<button type="submit">Add</button>
 	</form>
+	<form #goalForm="ngForm" (ngSubmit)="setGoal(goalForm)">
+		<input type="number"
+			placeholder="Goal"
+			name="goal"
+			[(ngModel)]="goal">
+		<button type="submit">Set Goal</button>
+	</form>
 </div>

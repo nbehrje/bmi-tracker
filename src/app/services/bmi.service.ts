@@ -9,13 +9,15 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 })
 export class BmiService {
 	private bmis = new BehaviorSubject<Bmi[]>([]);
+	private goal = new BehaviorSubject<Number>(-1);
+	
 	constructor() {
 		this.bmis = new BehaviorSubject<Bmi[]>([
 			new Bmi(6, 150, new Date("2020-03-01")),
 			new Bmi(6, 150, new Date("2020-03-29")),
 			new Bmi(6, 155, new Date("2020-04-04")),
-			new Bmi(6, 145, new Date("2020-04-07")),
-			new Bmi(6, 155, new Date("2020-04-09")),
+			new Bmi(6, 145, new Date("2020-04-10")),
+			new Bmi(6, 155, new Date("2020-04-12")),
 		]);
 	}
 	
@@ -37,5 +39,13 @@ export class BmiService {
 		});
 		this.bmis.next(bmiList);
 		return true;
+	}
+	
+	setGoal(goal: Number) {
+		this.goal.next(goal);
+	}
+	
+	getGoal() : Observable<Number> {
+		return this.goal;
 	}
 }

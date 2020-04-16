@@ -10,6 +10,7 @@ import { Bmi } from '../../model/bmi';
 })
 export class AddBmiComponent {
 	public bmi: Bmi;
+	public goal: Number;
 	
 	constructor(private bmiService: BmiService) {
 		this.bmi = new Bmi(0, 0, new Date());
@@ -19,5 +20,9 @@ export class AddBmiComponent {
 		this.bmi.date = new Date(this.bmi.date);
 		this.bmiService.addBmi(this.bmi);
 		this.bmi = new Bmi(0, 0, new Date());
+	}
+	
+	setGoal(goalForm) {
+		this.bmiService.setGoal(this.goal);
 	}
 }
