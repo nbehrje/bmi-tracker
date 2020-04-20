@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { BmiService } from '../../services/bmi.service';
 import { Bmi } from '../../model/bmi';
-import 'chartjs-plugin-annotation';
+import * as ChartAnnotation from 'chartjs-plugin-annotation';
 
 @Component({
   selector: 'app-bmi-chart',
@@ -20,6 +20,8 @@ export class BmiChartComponent implements OnInit {
 	public chartData: ChartDataSets[] = [{data:[0,0,0,0,0,0,0], label: 'BMI'}];
 	
 	public chartType = "line";
+	
+	public chartPlugins = "[ChartAnnotation]";
 	
 	ngOnInit(): void {
 		this.bmiService.getBmis().subscribe(bmis => {
