@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { BmiService } from '../../services/bmi.service';
 import { Bmi } from '../../model/bmi';
-import * as ChartAnnotation from 'chartjs-plugin-annotation';
+import 'chartjs-plugin-annotation';
 
 @Component({
   selector: 'app-bmi-chart',
@@ -71,7 +71,6 @@ export class BmiChartComponent implements OnInit {
 					}]
 				}
 			}
-			console.log(this.chartOptions);
 		});
 	}
 	

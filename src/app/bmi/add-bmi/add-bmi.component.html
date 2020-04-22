@@ -1,8 +1,20 @@
 <div class="form-group">
 	<form #bmiForm="ngForm" (ngSubmit)="onSubmit(bmiForm)">
-		<input type="date"
-			name="date"
-			[(ngModel)]="bmi.date">
+		<div>
+			<input type="text"
+				name="date"
+				ngbDatepicker
+				#d="ngbDatepicker"
+				[(ngModel)]="bmi.date"
+				(focus)="d.open()"
+				(dateSelect)="d.close()"> 
+			<button
+				(click)="d.toggle()"
+				class="btn btn-primary-outline"
+				type="button">
+				<img src="assets/img/calendar-icon.png" style="width: 1.5rem; height: 1.5rem;"/>
+			</button> 
+		</div>
 		<input type="number"
 			placeholder="Height"
 			name="height"
