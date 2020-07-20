@@ -15,15 +15,21 @@
 				<img src="assets/img/calendar-icon.png" style="width: 1.5rem; height: 1.5rem;"/>
 			</button> 
 		</div>
-		<input type="number"
-			placeholder="Height"
-			name="height"
-			[(ngModel)]="bmi.height">
-		<input type="number"
-			placeholder="Weight"
-			name="weight"
-			[(ngModel)]="bmi.weight">
-		<button type="submit">Add</button>
+		<div>
+			<input type="number"
+				placeholder="Height"
+				name="height"
+				[(ngModel)]="bmi.height">
+			<span> ft </span>
+			<input type="number"
+				placeholder="Weight"
+				name="weight"
+				[(ngModel)]="bmi.weight">
+			<span> lbs </span>
+			<button
+				class="btn btn-primary"
+				type="submit">Add</button>
+		</div>
 	</form>
 	<form #goalForm="ngForm" (ngSubmit)="setGoal(goalForm)">
 		<input type="number"
